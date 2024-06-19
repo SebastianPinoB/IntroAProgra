@@ -1,21 +1,32 @@
 import csv
+def abrirArchivo():
+    with open("datos.csv", "r") as archivo:
+        datos = csv.DictReader(archivo)
+        return list(datos)
 
-
-with open("datos.csv", "r") as archivo:
-    datos = csv.DictReader(archivo)
+def mayoresDeEdad(datos):
     mayores = []
-    menores = []
-
     for i in datos:
         if int(i["Edad"]) >= 18:
             mayores.append(i)
-        else:
+    return mayores
+
+def menoresDeEdad(datos):
+    menores = []
+    for i in datos:
+        if int(i["Edad"]) < 18:
             menores.append(i)
+    return menores
 
-    print("Mayores")
-    for i in mayores:
+def mostrar(lista):
+    for i in lista:
         print(i)
 
-    print("Menores")
-    for i in menores:
-        print(i)
+datos = abrirArchivo()
+menores = menoresDeEdad(datos)
+print("MENORES : ")
+mostrar(menores)
+print(" ")
+mayores = mayoresDeEdad(datos)
+print("MAYORES : ")
+mostrar(mayores)

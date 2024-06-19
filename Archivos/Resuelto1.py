@@ -1,4 +1,6 @@
 import csv
+import json
+
 def abrirArchivo():
     with open("datos.csv", "r") as archivo:
         datos = csv.DictReader(archivo)
@@ -22,6 +24,11 @@ def mostrar(lista):
     for i in lista:
         print(i)
 
+def exportarJson(mayores):
+    with open("mayoresJson", "w") as archivo:
+        exportar = json.dump(mayores, archivo, indent=1)
+    return exportar
+
 datos = abrirArchivo()
 menores = menoresDeEdad(datos)
 print("MENORES : ")
@@ -30,3 +37,5 @@ print(" ")
 mayores = mayoresDeEdad(datos)
 print("MAYORES : ")
 mostrar(mayores)
+
+exportarJson(mayores)
